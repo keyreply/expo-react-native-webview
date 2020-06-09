@@ -33,7 +33,6 @@ export default function App() {
             <Header>
               <Left>
                 <Button
-                  danger
                   rounded
                   transparent
                   iconLeft
