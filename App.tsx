@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Alert, SafeAreaView, Modal } from 'react-native';
+import { StyleSheet, Alert, Modal } from 'react-native';
 import { Container, Header, Content, Fab, Icon, Left, Body, Button, Text, Title, View } from 'native-base';
 
 export default function App() {
