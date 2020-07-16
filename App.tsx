@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import { StyleSheet, Alert, Modal } from 'react-native';
-import { Container, Header, Content, Fab, Icon, Left, Body, Button, Text, Title, View } from 'native-base';
+import { Container, Header, Fab, Icon, Left, Body, Button, Title } from 'native-base';
+import { WebView } from 'react-native-webview';
 
 export default function App() {
   const [modalVisible, setModalVisible] = useState(false);
+
+  const INJECTED_JAVASCRIPT = `(function() {
+    window.ReactNativeWebView.postMessage(JSON.stringify(window.location));
+  })();`;
 
   return (
     <Container>
@@ -41,9 +46,21 @@ export default function App() {
               </Button>
             </Left>
           </Header>
-          <Content>
-            <Text>Open up App.tsx to start working on your app!</Text>
-          </Content>
+          <WebView
+            source={{ uri: 'https://panin-uat.app.keyreply.com/webchat/' }}
+            // source={{ html: `
+            // <script>
+            //   document.addEventListener("DOMContentLoaded", function(event) { 
+            //     //do work
+            //     const newEl = document.createElement("p");
+            //     document.body.appendChild(newEl);
+            //     const element = document.getElementsByTagName("p");
+            //     document.getElementsByTagName("p")[0].innerHTML = 'Hello World';
+            //   });
+            // </script>
+            // `}}
+            // injectedJavaScript={INJECTED_JAVASCRIPT}
+          />
         </Container>
       </Modal>
     </Container>
