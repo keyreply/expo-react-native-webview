@@ -47,7 +47,7 @@ export default function App() {
             </Left>
           </Header>
           <WebView
-            source={{ uri: 'https://panin-uat.app.keyreply.com/webchat/' }}
+            source={{ uri: 'https://panin-uat.app.keyreply.com/webchat/?mode=mobile' }}
             // source={{ html: `
             // <script>
             //   document.addEventListener("DOMContentLoaded", function(event) { 
