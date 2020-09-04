@@ -1,9 +1,52 @@
-<script>
-  document.addEventListener("DOMContentLoaded", function(event) { 
-    //do work
-    const newEl = document.createElement("p");
-    document.body.appendChild(newEl);
-    const element = document.getElementsByTagName("p");
-    document.getElementsByTagName("p")[0].innerHTML = 'Hello World';
-  });
-</script>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    window.kr_settings = {
+      "server": "https://panin-uat.app.keyreply.com/server/",
+      "isPreview": true,
+      // "getToken": {
+      //   "url": "http://localhost:3030",
+      //   "method": "GET"
+      // },
+      // user: {}
+    };
+  </script>
+  <script async src="https://panin-uat.app.keyreply.com/webchat/js/app.js"></script>
+  <style>
+    /*Panel Header*/
+    #keyreply-panel-header {
+      background-color: <insert here> !important
+    }
+
+    /*Panel Body*/
+    #keyreply-panel-body {
+      background-color: <insert here> !important
+    }
+
+    /*Text bubble*/
+    .keyreply-bubble {
+      background-color: <insert here> !important
+    }
+
+    /*Launcher logo*/
+    .keyreply-launcher {
+      background-image: url(<insert here>) !important
+    }
+
+    /* @media only screen and (max-width: 1024px) {
+      #kr-launcher {
+        bottom: 100px;
+      }
+    } */
+  </style>
+</body>
+
+</html>

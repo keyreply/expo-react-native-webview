@@ -2,8 +2,13 @@ import React, { useState } from 'react';
 import { StyleSheet, Alert, Modal } from 'react-native';
 import { Container, Header, Fab, Icon, Left, Body, Button, Title } from 'native-base';
 import { WebView } from 'react-native-webview';
+import Constants from 'expo-constants';
 
-export default function App() {
+App.defaultProps = {
+  ...Constants.manifest.extra
+}
+
+export default function App({ URI }: { URI: string }) {
   const [modalVisible, setModalVisible] = useState(false);
 
   const INJECTED_JAVASCRIPT = `(function() {
@@ -14,7 +19,7 @@ export default function App() {
     <Container>
       <Header>
         <Body>
-          <Title>Webview React Native</Title>
+          <Title>KR Sample Webview</Title>
         </Body>
       </Header>
       <Fab
@@ -47,7 +52,7 @@ export default function App() {
             </Left>
           </Header>
           <WebView
-            source={{ uri: 'https://panin-uat.app.keyreply.com/webchat/?mode=mobile' }}
+            source={{ uri: URI }}
             // source={{ html: `
             // <script>
             //   document.addEventListener("DOMContentLoaded", function(event) { 
