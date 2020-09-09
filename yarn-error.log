@@ -1,30 +1,25 @@
 Arguments: 
-  /usr/local/bin/node /Users/muhammadramadhoni/.yarn/bin/yarn.js add inline-dotenv
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.22.5/libexec/bin/yarn.js install
 
 PATH: 
-  /Users/muhammadramadhoni/.yarn/bin:/Users/muhammadramadhoni/.config/yarn/global/node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Users/muhammadramadhoni/.yarn/bin:/Users/muhammadramadhoni/.config/yarn/global/node_modules/.bin
+  /Library/Frameworks/Python.framework/Versions/3.8/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Library/Frameworks/Python.framework/Versions/3.8/bin:/Users/quocnguyen/flutter/bin:/Users/quocnguyen/flutter/bin
 
 Yarn version: 
-  1.21.1
+  1.22.5
 
 Node version: 
-  12.14.0
+  12.16.1
 
 Platform: 
   darwin x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/inline-dotenv: Not found
-      at Request.params.callback [as _callback] (/Users/muhammadramadhoni/.yarn/lib/cli.js:66947:18)
-      at Request.self.callback (/Users/muhammadramadhoni/.yarn/lib/cli.js:140665:22)
-      at Request.emit (events.js:210:5)
-      at Request.<anonymous> (/Users/muhammadramadhoni/.yarn/lib/cli.js:141637:10)
-      at Request.emit (events.js:210:5)
-      at IncomingMessage.<anonymous> (/Users/muhammadramadhoni/.yarn/lib/cli.js:141559:12)
-      at Object.onceWrapper (events.js:299:28)
-      at IncomingMessage.emit (events.js:215:7)
-      at endReadableNT (_stream_readable.js:1184:12)
-      at processTicksAndRejections (internal/process/task_queues.js:80:21)
+  SyntaxError: /Users/quocnguyen/Projects/expo-react-native-webview/package.json: Unexpected token } in JSON at position 606
+      at JSON.parse (<anonymous>)
+      at /usr/local/Cellar/yarn/1.22.5/libexec/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/usr/local/Cellar/yarn/1.22.5/libexec/lib/cli.js:310:30)
+      at /usr/local/Cellar/yarn/1.22.5/libexec/lib/cli.js:321:13
 
 npm manifest: 
   {
@@ -37,6 +32,7 @@ npm manifest:
       "eject": "expo eject"
     },
     "dependencies": {
+      "dotenv": "^8.2.0",
       "expo": "~37.0.3",
       "native-base": "^2.13.12",
       "react": "~16.9.0",
@@ -44,7 +40,8 @@ npm manifest:
       "react-native": "https://github.com/expo/react-native/archive/sdk-37.0.1.tar.gz",
       "react-native-screens": "~2.2.0",
       "react-native-web": "~0.11.7",
-      "react-native-webview": "^10.2.3"
+      "react-native-webview": "^10.2.3",
+      "react-native-keyboard-listener"
     },
     "devDependencies": {
       "@babel/core": "^7.8.6",
@@ -2253,6 +2250,11 @@ Lockfile:
     version "1.2.1"
     resolved "https://registry.yarnpkg.com/didyoumean/-/didyoumean-1.2.1.tgz#e92edfdada6537d484d73c0172fd1eba0c4976ff"
     integrity sha1-6S7f2tplN9SE1zwBcv0eugxJdv8=
+  
+  dotenv@^8.2.0:
+    version "8.2.0"
+    resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
+    integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
   
   ee-first@1.1.1:
     version "1.1.1"

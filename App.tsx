@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { StyleSheet, Alert, Modal } from 'react-native';
-import { Container, Header, Fab, Icon, Left, Body, Button, Title } from 'native-base';
+import { StyleSheet, Alert, Modal, SafeAreaView, Button } from 'react-native';
+import { View, TouchableOpacity, Text } from "react-native";
+import { Keyboard, TextInput } from 'react-native';
+import { Container, Header, Fab, Icon, Left, Body, Title } from 'native-base';
 import { WebView } from 'react-native-webview';
 import Constants from 'expo-constants';
-
+import KeyboardListener from 'react-native-keyboard-listener';
 App.defaultProps = {
   ...Constants.manifest.extra
 }
@@ -39,33 +41,20 @@ export default function App({ URI }: { URI: string }) {
           Alert.alert('Modal has been closed.');
       }}>
         <Container>
-          <Header>
-            <Left>
-              <Button
-                rounded
-                transparent
-                iconLeft
-                onPress={() => setModalVisible(false)}
-              >
-                <Icon name="arrow-back" />
-              </Button>
-            </Left>
-          </Header>
-          <WebView
-            source={{ uri: URI }}
-            // source={{ html: `
-            // <script>
-            //   document.addEventListener("DOMContentLoaded", function(event) { 
-            //     //do work
-            //     const newEl = document.createElement("p");
-            //     document.body.appendChild(newEl);
-            //     const element = document.getElementsByTagName("p");
-            //     document.getElementsByTagName("p")[0].innerHTML = 'Hello World';
-            //   });
-            // </script>
-            // `}}
-            // injectedJavaScript={INJECTED_JAVASCRIPT}
-          />
+          <SafeAreaView style={[styles.container, { backgroundColor: '#ffffff' }]}>
+            <View style={styles.container}>
+              <KeyboardListener
+                onWillShow={() => { this.setState({ keyboardOpen: true }); }}
+                onWillHide={() => { this.setState({ keyboardOpen: false }); }}
+              />
+              <WebView source={{ uri: URI }} />
+              <View style={styles.cancelPosition}>  
+              <Button 
+                onPress={() => setModalVisible(false)} 
+                title="x" color="#FFFFFF" />
+              </View>
+            </View>
+          </SafeAreaView>
         </Container>
       </Modal>
     </Container>
@@ -77,4 +66,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
+  cancelPosition: {
+    position:'absolute',
+    right:0,
+    marginTop:10,
+    marginRight:10,
+    zIndex:1,
+    height:30,
+    width:30
+  }
 });
