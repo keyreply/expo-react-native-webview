@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, Alert, Modal } from 'react-native';
-import { Container, Header, Fab, Icon, Left, Body, Button, Title } from 'native-base';
+import { StyleSheet, Alert, Modal, AsyncStorage } from 'react-native';
+import { Container, Header, Fab, Icon, Left, Right, Body, Button, Title } from 'native-base';
 import { WebView } from 'react-native-webview';
 import Constants from 'expo-constants';
 
@@ -8,12 +8,17 @@ Main.defaultProps = {
   ...Constants.manifest.extra
 }
 
-export default function Main({ URI }: { URI: string }) {
+export default function Main({ URI, navigation }: { URI: string, navigation: any }) {
   const [modalVisible, setModalVisible] = useState(false);
 
   const INJECTED_JAVASCRIPT = `(function() {
     window.ReactNativeWebView.postMessage(JSON.stringify(window.location));
   })();`;
+
+  const logout = () => {
+    AsyncStorage.removeItem('token');
+    navigation.navigate('Login');
+  }
 
   return (
     <Container>
@@ -21,6 +26,16 @@ export default function Main({ URI }: { URI: string }) {
         <Body>
           <Title>KR Sample Webview</Title>
         </Body>
+        <Right>
+          <Button
+            rounded
+            transparent
+            iconLeft
+            onPress={logout}
+          >
+            <Icon name="md-log-out" />
+          </Button>
+        </Right>
       </Header>
       <Fab
         direction="up"
