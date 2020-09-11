@@ -17,7 +17,6 @@ export default function Login({ navigation }: any) {
       const { data }: any = await axios.post('/', {
         username
       })
-      console.log(data);
       setLoading(false);
       AsyncStorage.setItem('token', data);
       navigation.navigate('Main');
