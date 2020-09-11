@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { StyleSheet, KeyboardAvoidingView, TouchableWithoutFeedback, Platform, Keyboard, Alert } from 'react-native';
+import { StyleSheet, KeyboardAvoidingView, TouchableWithoutFeedback, Platform, Keyboard, Alert, AsyncStorage } from 'react-native';
 import { Container, Form, Item, Label, Input, Button, Text, H1, Spinner } from 'native-base';
-import { NavigationActions } from 'react-navigation';
+import axios from '../api/axios';
 
 export default function Login({ navigation }: any) {
   const [username, setUsername] = useState('');
@@ -11,13 +11,25 @@ export default function Login({ navigation }: any) {
     setUsername(text);
   }
 
-  const login = () => {
+  const login = async () => {
     setLoading(true);
-    setTimeout(() => {
+    try {
+      const { data }: any = await axios.post('/', {
+        username
+      })
+      console.log(data);
       setLoading(false);
-      Alert.alert(username);
+      AsyncStorage.setItem('token', data);
       navigation.navigate('Main');
-    }, 1000)
+    } catch (err) {
+      const { message } = err.response.data;
+      setLoading(false);
+      if (!!message) {
+        Alert.alert(message);
+      } else {
+        Alert.alert('internal server error!')
+      }
+    }
   }
 
   return (
@@ -33,6 +45,7 @@ export default function Login({ navigation }: any) {
               <Label>Username</Label>
               <Input onChangeText={handleText}/>
             </Item>
+            <Text style={styles.green}>*This is non password login, you can sign in using reserved username provided. Please contact developer.</Text>
           </Form>
           <Button block danger onPress={login}>
             {
@@ -58,5 +71,8 @@ const styles = StyleSheet.create({
   },
   mb10: {
     marginBottom: 10
+  },
+  green: {
+    color: 'green'
   }
 })
