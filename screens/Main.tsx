@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Alert, Modal, AsyncStorage } from 'react-native';
-import { Container, Header, Fab, Icon, Left, Right, Body, Button, Title } from 'native-base';
+import { Container, Content, Header, Fab, Icon, Left, Right, Body, Button, Title, Text, Row } from 'native-base';
 import { WebView } from 'react-native-webview';
 import Constants from 'expo-constants';
 
@@ -37,6 +37,16 @@ export default function Main({ URI, navigation }: { URI: string, navigation: any
           </Button>
         </Right>
       </Header>
+      <Content>
+        <Row style={styles.content}>
+          <Button danger iconLeft>
+            <Icon name="md-notifications" />
+            <Text>
+              Send Notification
+            </Text>
+          </Button>
+        </Row>
+      </Content>
       <Fab
         direction="up"
         containerStyle={{ }}
@@ -80,4 +90,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
+  content: {
+    justifyContent: 'center'
+  }
 });
