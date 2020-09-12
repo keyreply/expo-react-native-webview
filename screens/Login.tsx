@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, KeyboardAvoidingView, TouchableWithoutFeedback, Platform, Keyboard, Alert, AsyncStorage } from 'react-native';
 import { Container, Form, Item, Label, Input, Button, Text, H1, Spinner, View } from 'native-base';
-import axios from '../api/axios';
+import Constants from 'expo-constants';
 
-export default function Login({ navigation }: any) {
+import initAxios from '../api/axios';
+
+Login.defaultProps = {
+  ...Constants.manifest.extra
+}
+
+export default function Login({ navigation, SERVER }: any) {
   const [username, setUsername] = useState('');
   const [loading, setLoading] = useState(false);
   const [checkingToken, setCheckingToken] = useState(true);
+
+  const axios = initAxios(SERVER);
 
   const handleText = (text: string) => {
     setUsername(text);
@@ -22,7 +30,7 @@ export default function Login({ navigation }: any) {
       AsyncStorage.setItem('token', data);
       navigation.navigate('Main');
     } catch (err) {
-      const { message } = err.response.data;
+      const { message } = err?.response?.data;
       setLoading(false);
       if (!!message) {
         Alert.alert(message);

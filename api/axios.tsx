@@ -1,8 +1,11 @@
-import axios from 'axios';
+import axios, { AxiosInstance } from 'axios';
 
-const SERVER = 'https://122891fc5350.ngrok.io';
-const axiosInstance = axios.create({
-  baseURL: SERVER
-})
+function initAxios(SERVER: string): AxiosInstance {
+  const axiosInstance = axios.create({
+    baseURL: SERVER
+  })
 
-export default axiosInstance;
+  return axiosInstance;
+}
+
+export default initAxios;
