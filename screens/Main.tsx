@@ -98,7 +98,7 @@ export default function Main({ URI, navigation, SERVER }: { URI: string, navigat
 
   const logout = async () => {
     try {
-      await axios.post(`/logout/${active}`, { token: expoPushToken });\
+      await axios.post(`/logout/${active}`, { token: expoPushToken });
       AsyncStorage.removeItem('token');
       navigation.navigate('Login');
     } catch (err) {
