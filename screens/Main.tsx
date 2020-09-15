@@ -208,6 +208,10 @@ export default function Main({ URI, navigation, SERVER }: { URI: string, navigat
           <Title>KR Sample Webview</Title>
         </Body>
         <Right>
+          <View style={styles.online}>
+            <Icon name="md-checkmark-circle" style={[styles.green, styles.mr10]} />
+            <Text style={styles.green} >{active}</Text>
+          </View>
           <Button
             rounded
             transparent
@@ -288,6 +292,7 @@ export default function Main({ URI, navigation, SERVER }: { URI: string, navigat
                 <Icon name="arrow-back" />
               </Button>
             </Left>
+            <Body />
           </Header>
           <WebView
             source={{ uri: URI }}
@@ -313,5 +318,15 @@ const styles = StyleSheet.create({
   },
   mt10: {
     marginTop: 10
+  },
+  mr10: {
+    marginRight: 5
+  },
+  green: {
+    color: Platform.OS === 'ios' ? 'green' : 'white'
+  },
+  online: {
+    flexDirection: 'row',
+    alignItems: 'center'
   }
 });
