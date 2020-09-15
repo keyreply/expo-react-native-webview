@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, Alert, Modal, AsyncStorage, Platform } from 'react-native';
-import { Container, Content, Header, Fab, Icon, Left, Right, Body, Button, Title, Text, Row, Form, H1, Item, Label, Input, Picker } from 'native-base';
+import { Container, Content, Header, Fab, Icon, Left, Right, Body, Button, Title, Text, Row, Form, Item, Label, Input, Picker, View } from 'native-base';
 import { WebView } from 'react-native-webview';
 import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
@@ -219,44 +219,46 @@ export default function Main({ URI, navigation, SERVER }: { URI: string, navigat
         </Right>
       </Header>
       <Content>
-        <Form>
-          <Item picker>
-            <Label>To</Label>
-            <Picker
-              mode="dropdown"
-              iosIcon={<Icon name="arrow-down" />}
-              style={{ width: undefined }}
-              placeholder="Select recipient"
-              placeholderIconColor="#007aff"
-              selectedValue={recipients}
-              onValueChange={(value) => setRecipients(value)}
-            >
-              {
-                usernames.map((username: any, key) => {
-                  return (
-                    <Picker.Item key={key} label={username.username} value={username.pushToken} />
-                  )
-                })
-              }
-            </Picker>
-          </Item>
-          <Item stackedLabel>
-            <Label>Title</Label>
-            <Input onChangeText={(text) => handleText('title', text)}/>
-          </Item>
-          <Item stackedLabel last>
-            <Label>Body</Label>
-            <Input onChangeText={(text) => handleText('body', text)}/>
-          </Item>
-        </Form>
-        <Row style={styles.content}>
-          <Button danger iconLeft onPress={sendNotification}>
-            <Icon name="md-notifications" />
-            <Text>
-              Send Notification
-            </Text>
-          </Button>
-        </Row>
+        <View style={styles.form}>
+          <Form>
+            <Item picker>
+              <Label>To</Label>
+              <Picker
+                mode="dropdown"
+                iosIcon={<Icon name="arrow-down" />}
+                style={{ width: undefined }}
+                placeholder="Select recipient"
+                placeholderIconColor="#007aff"
+                selectedValue={recipients}
+                onValueChange={(value) => setRecipients(value)}
+              >
+                {
+                  usernames.map((username: any, key) => {
+                    return (
+                      <Picker.Item key={key} label={username.username} value={username.pushToken} />
+                    )
+                  })
+                }
+              </Picker>
+            </Item>
+            <Item stackedLabel>
+              <Label>Title</Label>
+              <Input onChangeText={(text) => handleText('title', text)}/>
+            </Item>
+            <Item stackedLabel last>
+              <Label>Body</Label>
+              <Input onChangeText={(text) => handleText('body', text)}/>
+            </Item>
+          </Form>
+          <Row style={[styles.content, styles.mt10]}>
+            <Button danger iconLeft onPress={sendNotification}>
+              <Icon name="md-notifications" />
+              <Text>
+                Send Notification
+              </Text>
+            </Button>
+          </Row>
+        </View>
       </Content>
       <Fab
         direction="up"
@@ -303,5 +305,13 @@ const styles = StyleSheet.create({
   },
   content: {
     justifyContent: 'center'
+  },
+  form: {
+    flex: 1,
+    justifyContent: 'space-between',
+    margin: 10
+  },
+  mt10: {
+    marginTop: 10
   }
 });
