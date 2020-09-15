@@ -42,20 +42,27 @@ export default function Login({ navigation, SERVER }: any) {
 
   useEffect(() => {
     (async () => {
-      const token: string | null = await AsyncStorage.getItem('token');
-
-      if (!token) {
-        setCheckingToken(false);
-        return;
-      }
       try {
+        const token: string | null = await AsyncStorage.getItem('token');
+
+        if (!token) {
+          setCheckingToken(false);
+          return;
+        }
         await axios.put('/', { token })
         navigation.navigate('Main');
       } catch (err) {
+        const { message } = err?.response?.data;
+        
+        if (!!message) {
+          Alert.alert(message);
+        } else {
+          Alert.alert('internal server error!')
+        }
         AsyncStorage.removeItem('token');
         setCheckingToken(false);
       }
-    })()
+    })();
   }, [])
 
   return (
@@ -79,7 +86,7 @@ export default function Login({ navigation, SERVER }: any) {
               </Item>
               <Text style={styles.green}>*This is non password login, you can sign in using reserved username provided. Please contact developer.</Text>
             </Form>
-            <Button block danger onPress={login}>
+            <Button block danger onPress={!loading && login}>
               {
                 loading ?
                   <Spinner color='white' />
