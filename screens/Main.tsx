@@ -57,6 +57,7 @@ async function registerForPushNotificationsAsync() {
     token = (await Notifications.getExpoPushTokenAsync()).data;
     console.log(token);
   } else {
+    token = '[simulator]';
     alert('Must use physical device for Push Notifications');
   }
 
@@ -103,6 +104,7 @@ export default function Main({ URI, navigation, SERVER }: { URI: string, navigat
       navigation.navigate('Login');
     } catch (err) {
       const { message } = err?.response?.data;
+
       if (!!message) {
         Alert.alert(message);
       } else {
@@ -151,6 +153,7 @@ export default function Main({ URI, navigation, SERVER }: { URI: string, navigat
       await fetchUsernames(data.username);
     } catch (err) {
       const { message } = err?.response?.data;
+
       if (!!message) {
         Alert.alert(message);
       } else {
@@ -221,7 +224,7 @@ export default function Main({ URI, navigation, SERVER }: { URI: string, navigat
               style={{ width: undefined }}
               placeholder="Select recipient"
               placeholderIconColor="#007aff"
-              selectedValue={form.to}
+              selectedValue={recipients}
               onValueChange={(value) => setRecipients(value)}
             >
               {
