@@ -53,7 +53,7 @@ export default function Login({ navigation, SERVER }: any) {
         navigation.navigate('Main');
       } catch (err) {
         const { message } = err?.response?.data;
-        
+
         if (!!message) {
           Alert.alert(message);
         } else {
@@ -86,7 +86,7 @@ export default function Login({ navigation, SERVER }: any) {
               </Item>
               <Text style={styles.green}>*This is non password login, you can sign in using reserved username provided. Please contact developer.</Text>
             </Form>
-            <Button block danger onPress={!loading && login}>
+            <Button disabled={loading} block danger onPress={login}>
               {
                 loading ?
                   <Spinner color='white' />
