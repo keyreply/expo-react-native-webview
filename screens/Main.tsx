@@ -103,7 +103,7 @@ export default function Main({ URI, navigation, SERVER }: { URI: string, navigat
       AsyncStorage.removeItem('token');
       navigation.navigate('Login');
     } catch (err) {
-      const { message } = err?.response?.data;
+      const message = err?.response?.data?.message;
 
       if (!!message) {
         Alert.alert(message);
@@ -155,7 +155,7 @@ export default function Main({ URI, navigation, SERVER }: { URI: string, navigat
       await axios.post(`/pushtoken/${data.username}`, { token: pushToken });
       await fetchUsernames(data.username);
     } catch (err) {
-      const { message } = err?.response?.data;
+      const message = err?.response?.data?.message;
 
       if (!!message) {
         Alert.alert(message);
@@ -175,7 +175,7 @@ export default function Main({ URI, navigation, SERVER }: { URI: string, navigat
       try {
         await verifyToken(token);
       } catch(err) {
-        const { message } = err?.response?.data;
+        const message = err?.response?.data?.message;
         if (!!message) {
           Alert.alert(message);
         } else {

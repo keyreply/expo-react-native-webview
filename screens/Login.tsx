@@ -30,7 +30,7 @@ export default function Login({ navigation, SERVER }: any) {
       AsyncStorage.setItem('token', data);
       navigation.navigate('Main');
     } catch (err) {
-      const { message } = err?.response?.data;
+      const message = err?.response?.data?.message;
       setLoading(false);
       if (!!message) {
         Alert.alert(message);
@@ -52,7 +52,7 @@ export default function Login({ navigation, SERVER }: any) {
         await axios.put('/', { token })
         navigation.navigate('Main');
       } catch (err) {
-        const { message } = err?.response?.data;
+        const message = err?.response?.data?.message;
 
         if (!!message) {
           Alert.alert(message);
