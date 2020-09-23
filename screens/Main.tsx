@@ -149,7 +149,7 @@ export default function Main({ URI, navigation, SERVER }: { URI: string, navigat
   const verifyToken = async (pushToken: string) => {
     try {
       const token: string | null = await AsyncStorage.getItem('token');
-      const { data } = await axios.put('/', { token })
+      const { data } = await axios.put('/auth', { token })
 
       setActive(data.username);
       await axios.post(`/pushtoken/${data.username}`, { token: pushToken });

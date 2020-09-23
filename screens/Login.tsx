@@ -23,7 +23,7 @@ export default function Login({ navigation, SERVER }: any) {
   const login = async () => {
     setLoading(true);
     try {
-      const { data }: any = await axios.post('/', {
+      const { data }: any = await axios.post('/auth', {
         username
       })
       setLoading(false);
@@ -49,7 +49,7 @@ export default function Login({ navigation, SERVER }: any) {
           setCheckingToken(false);
           return;
         }
-        await axios.put('/', { token })
+        await axios.put('/auth', { token })
         navigation.navigate('Main');
       } catch (err) {
         const message = err?.response?.data?.message;
