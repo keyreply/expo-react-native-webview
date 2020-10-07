@@ -81,6 +81,7 @@ export default function Main({ URI, navigation, SERVER }: { URI: string, navigat
     token: false
   });
   const [fabStatus, setFabStatus] = useState(false);
+  const [webviewUri, setWebviewUri] = useState("");
   const [active, setActive] = useState('');
   const [expoPushToken, setExpoPushToken] = useState('');
   const [notification, setNotification] = useState(false);
@@ -170,6 +171,17 @@ export default function Main({ URI, navigation, SERVER }: { URI: string, navigat
       AsyncStorage.removeItem('token');
       navigation.navigate('Login');
     }
+  }
+
+  const handleModal = async () => {
+    if (options.token) {
+      const token: string | null = await AsyncStorage.getItem('token');
+      setWebviewUri(URI + `?mode=mobile&token=${token}`);
+    }
+    if (options.id) {
+      setWebviewUri(URI + `?mode=mobile&id=${active}`);
+    }
+    setModalVisible(true);
   }
 
   useEffect(() => {
@@ -295,7 +307,7 @@ export default function Main({ URI, navigation, SERVER }: { URI: string, navigat
         onPress={() => setFabStatus((val) => !val)}
       >
         <Icon name="md-chatbubbles" />
-        <Button onPress={() => setModalVisible(true)} style={{ backgroundColor: '#34A34F' }}>
+        <Button onPress={handleModal} style={{ backgroundColor: '#34A34F' }}>
           <Icon name="md-chatboxes" />
         </Button>
         <Button style={{ backgroundColor: '#3B5998' }}>
@@ -324,7 +336,7 @@ export default function Main({ URI, navigation, SERVER }: { URI: string, navigat
             <Body />
           </Header>
           <WebView
-            source={{ uri: URI }}
+            source={{ uri: webviewUri }}
             onMessage={(event) => {
               setModalVisible(false);
             }}
