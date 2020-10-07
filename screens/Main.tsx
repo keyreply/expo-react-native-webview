@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, Alert, Modal, AsyncStorage, Platform } from 'react-native';
-import { Container, Content, Header, Fab, Icon, Left, Right, Body, Button, Title, Text, Row, Form, Item, Label, Input, Picker, View } from 'native-base';
+import { Container, Content, Header, Fab, Icon, Left, Right, Body, Button, Title, Text, Row, Form, Item, Label, Input, Picker, View, H1, CheckBox, ListItem } from 'native-base';
 import { WebView } from 'react-native-webview';
 import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
@@ -76,6 +76,10 @@ async function registerForPushNotificationsAsync() {
 export default function Main({ URI, navigation, SERVER }: { URI: string, navigation: any, SERVER: string }) {
   const [modalVisible, setModalVisible] = useState(false);
 
+  const [options, setOptions] = useState({
+    id: true,
+    token: false
+  });
   const [active, setActive] = useState('');
   const [expoPushToken, setExpoPushToken] = useState('');
   const [notification, setNotification] = useState(false);
@@ -223,7 +227,7 @@ export default function Main({ URI, navigation, SERVER }: { URI: string, navigat
         </Right>
       </Header>
       <Content>
-        <View style={styles.form}>
+        <View>
           <Form>
             <Item picker>
               <Label>To</Label>
@@ -263,6 +267,23 @@ export default function Main({ URI, navigation, SERVER }: { URI: string, navigat
             </Button>
           </Row>
         </View>
+        <View style={styles.settings}>
+          <H1>Settings for Initiation of Chatbot</H1>
+          <Content>
+          </Content>
+        </View>
+        <ListItem>
+          <CheckBox checked={options.token} onPress={() => { setOptions({ token: true, id: false }) }}/>
+          <Body>
+            <Text>Using token query</Text>
+          </Body>
+        </ListItem>
+        <ListItem>
+          <CheckBox checked={options.id} onPress={() => { setOptions({ token: false, id: true }) }}/>
+          <Body>
+            <Text>Using ID</Text>
+          </Body>
+        </ListItem>
       </Content>
       <Fab
         direction="up"
@@ -314,11 +335,6 @@ const styles = StyleSheet.create({
   content: {
     justifyContent: 'center'
   },
-  form: {
-    flex: 1,
-    justifyContent: 'space-between',
-    margin: 10
-  },
   mt10: {
     marginTop: 10
   },
@@ -330,6 +346,10 @@ const styles = StyleSheet.create({
   },
   online: {
     flexDirection: 'row',
+    alignItems: 'center'
+  },
+  settings: {
+    marginTop: 50,
     alignItems: 'center'
   }
 });
