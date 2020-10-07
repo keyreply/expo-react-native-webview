@@ -80,6 +80,7 @@ export default function Main({ URI, navigation, SERVER }: { URI: string, navigat
     id: true,
     token: false
   });
+  const [fabStatus, setFabStatus] = useState(false);
   const [active, setActive] = useState('');
   const [expoPushToken, setExpoPushToken] = useState('');
   const [notification, setNotification] = useState(false);
@@ -286,13 +287,20 @@ export default function Main({ URI, navigation, SERVER }: { URI: string, navigat
         </ListItem>
       </Content>
       <Fab
-        direction="up"
+        active={fabStatus}
+        direction="left"
         containerStyle={{ }}
-        style={{ backgroundColor: '#5067FF' }}
+        style={{ backgroundColor: '#DD5144' }}
         position="bottomRight"
-        onPress={() => setModalVisible(true)}
+        onPress={() => setFabStatus((val) => !val)}
       >
         <Icon name="md-chatbubbles" />
+        <Button onPress={() => setModalVisible(true)} style={{ backgroundColor: '#34A34F' }}>
+          <Icon name="md-chatboxes" />
+        </Button>
+        <Button style={{ backgroundColor: '#3B5998' }}>
+          <Icon name="md-chatboxes" />
+        </Button>
       </Fab>
       <Modal
         animationType="slide"
