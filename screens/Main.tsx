@@ -296,6 +296,9 @@ export default function Main({ URI, navigation, SERVER }: { URI: string, navigat
           </Header>
           <WebView
             source={{ uri: URI }}
+            onMessage={(event) => {
+              setModalVisible(false);
+            }}
           />
         </Container>
       </Modal>
