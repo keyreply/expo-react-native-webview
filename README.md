@@ -1,9 +1,17 @@
 # React Native Webview Using Expo
 
-v1.0
+v1.1
+
+## Change log
+* Simulate passoword-less login scenario
+* Added SERVER env variable, where to connect its backend. [See more.](https://github.com/keyreply/sample-server-react-native)
+* Added push notification simulator from Expo Framework. [See more.](https://docs.expo.io/push-notifications/overview/)
+* Multiple floating button to represent multiple scenario of chat window in webview
+
 
 ## Purpose
 This repo serves a simple app of React Native using Expo Framework. The app simulates react-native-webview compoenent, so user can do a trial of rendering any website uri (mobile adjustment recommended) or through a html static.
+
 
 ## Pre-requirements
 
@@ -23,6 +31,7 @@ Android Studio Simulator
 
 [Expo Client Play Store](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=en)
 
+Backend Mobile Setup. [Check repository.](https://github.com/keyreply/sample-server-react-native)
 
 
 ## Installation
@@ -32,24 +41,28 @@ Run install command using yarn
 yarn
 ```
 
+
 ## Environment Setup
 
 Please create `.env` file on the root directory to activate environment variables. To see the references, can be checked in `.env.example` file.
 
+
 ## Environment Variables
 ```
 URI=(Website url that you want to put in)
+SERVER=(backend url for login scenario and push token registry, recommended check on its backend repository)
 ```
-Note: The env variables has been set up to be accessible from props of App component. After setting up the variables in the `.env`, can be accessed inside application, in the `App.tsx` (dir: `src/App.tsx`). The url by default will be redirected to react native documentation.
+Note: The env variables has been set up to be accessible from props of App component. After setting up the variables in the `.env`, can be accessed inside application, in the screen components, e.g. `Main.tsx` (dir: `src/screens/Main.tsx`). The url by default will be redirected to react native documentation.
 
 ```
 ...
-function App({ URI }: { URI: string; }) {
+function Main({ URI }: { URI: string; }) {
 
 ...
 
 }
 ```
+
 
 ## Running The Application
 
@@ -79,7 +92,13 @@ accessed through Expo mobile application
 ## Additional Notes
 
 This app by default is designed to support KeyReply WebChat application for mobile app. This app is used development purpose to satisfy any client's case. There will be some documentation for usage of webchat URI of KeyReply.
+
+## Must Check Repository
+
+[KR Demo App Backend Repository](https://github.com/keyreply/sample-server-react-native)
+
 ***
+
 ## Webchat Mobile Mode URI Documentation
 
-under development.
+[Reference.](https://doc.clickup.com/p/h/3fyzp-488/2a99f584bdc4dd8)
