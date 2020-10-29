@@ -63,6 +63,7 @@ function Main({ URI }: { URI: string; }) {
 }
 ```
 
+URI that should be used is the static html with specific script environment that already set to be applicable to the webview. [See more here.](https://doc.clickup.com/p/h/3fyzp-488/2a99f584bdc4dd8)
 
 ## Running The Application
 
