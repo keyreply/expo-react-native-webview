@@ -90,6 +90,12 @@ accessed through Expo mobile application
 * Fill in all required fields
 * The App is published
 
+## Available Usernames (Passwordless)
+
+`['krdemo', 'krdemo2', 'krdemo3']`
+
+Can be checked user detail information inside users.json [here.](https://github.com/keyreply/sample-server-react-native/blob/master/users.json)
+
 ## Additional Notes
 
 This app by default is designed to support KeyReply WebChat application for mobile app. This app is used development purpose to satisfy any client's case. There will be some documentation for usage of webchat URI of KeyReply.
